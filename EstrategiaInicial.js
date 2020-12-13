@@ -1,4 +1,4 @@
-function maravillosaJugada(tablero,color){
+function estrategiaInicial(tablero,color){
     var colorActual = color;
     if(colorActual == "black"){
         var arrayMejoresMovimientosBlack = new Array();  

@@ -1,3 +1,4 @@
+/*Funcion que evalua los eventos posibles que puede recibir del websocket server */
 function evaluarMensaje(msg){
     if(msg.event == "ask_challenge"){     
             var board_id = msg.data.board_id

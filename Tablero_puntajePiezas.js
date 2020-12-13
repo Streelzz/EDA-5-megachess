@@ -1,3 +1,4 @@
+/*Crea una matriz con el string recibido, esta matriz representa al tablero en su estado actual*/
 function crearTablero(board){
     var tablero = new Array(16);
   
@@ -15,14 +16,15 @@ function crearTablero(board){
     }
     return tablero;
   }
-  
+
+/*Asigna los puntajes a las piezas del tablero*/
 function puntaje(pieza,mult){
     var puntos = 0;
         switch(pieza){
             case 'p': puntos = 10*mult;break; 
             case 'P': puntos = 10*mult;break;
-            case 'q': puntos = 11*mult;break;
-            case 'Q': puntos = 11*mult;break;
+            case 'q': puntos = 5*mult;break;
+            case 'Q': puntos = 5*mult;break;
             case 'h': puntos = 30*mult;break;
             case 'H': puntos = 30*mult;break;
             case 'b': puntos = 40*mult;break;

@@ -1,6 +1,11 @@
+/*Mi token asignado*/
 var auth_token="192d8725-66e6-49ae-8530-45e1286738f1";
-    var webSocket = new WebSocket('ws://megachess.herokuapp.com/service?authtoken='+auth_token);
+
+/*Se crea una nueva conexion con el websocket*/
+var webSocket = new WebSocket('ws://megachess.herokuapp.com/service?authtoken='+auth_token);
     
+   
+   /*Funciones necesarias para utilizar el websocket */
     webSocket.onerror = function(event) {
       onError(event)
     };

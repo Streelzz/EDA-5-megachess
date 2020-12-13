@@ -1,3 +1,4 @@
+/*Procedimiento que envia al websocket el mejor movimiento posible*/
 function mi_turno(msg){
     var board = msg.data.board;
     var color = msg.data.actual_turn;
@@ -7,51 +8,25 @@ function mi_turno(msg){
     var tablero = crearTablero(board);
     
     var jugadasPosibles = new Array();
-//  
     var cantPeones = contarPeones16(tablero,color);
 
     if(cantPeones > 20){
-        var mov = maravillosaJugada(tablero,color,cantPeones);
+        var mov = estrategiaInicial(tablero,color,cantPeones);
         jug = mejorPuntaje(mov,board_id,turn_token);
+
         console.log(mov)
         webSocket.send(JSON.stringify(jug));
     }else{
-//
-        jugadasPosibles = posiblesMovimientos(color,tablero);
-        //console.log(jugadasPosibles)
-    
-        var mejorJugada = seleccionarMejorMovimiento(jugadasPosibles);
-        //var mejorJugada = minimax(tablero,color,jugadasPosibles);
-        console.log(mejorJugada)
-    
+        jugadasPosibles = posiblesMovimientos(color,tablero); 
+        var mejorJugada = seleccionarMejorMovimiento(jugadasPosibles); 
         var move = mejorPuntaje(mejorJugada,board_id,turn_token);
-        //console.log(move)
+        
+        console.log(move)
         webSocket.send(JSON.stringify(move));
   }
 }
 
-/*function mi_turno(msg){
-    var board = msg.data.board;
-    var color = msg.data.actual_turn;
-    var board_id = msg.data.board_id;
-    var turn_token = msg.data.turn_token;
-    
-    var tablero = crearTablero(board);
-    
-    var jugadasPosibles = new Array();
-    
-    jugadasPosibles = posiblesMovimientos(color,tablero);
-    console.log(jugadasPosibles)
-  
-    //var mejorJugada = seleccionarMejorMovimiento(jugadasPosibles);
-    var mejorJugada = minimax(tablero,color,jugadasPosibles);
-    console.log(mejorJugada)
-  
-    var move = mejorPuntaje(mejorJugada,board_id,turn_token);
-  
-    webSocket.send(JSON.stringify(move));
-}*/
-
+/*Funcion que retorna un array con los mejores movimientos que cada pieza puede realizar*/
 function posiblesMovimientos(color,tablero){
 
     var colorActual = color;
@@ -113,7 +88,8 @@ function posiblesMovimientos(color,tablero){
             }*/
            
 }
-    
+ 
+/*Funcion que retorna el movimiento con el mayor puntaje*/
 function seleccionarMejorMovimiento(movimientosPosibles){
 
     var arrayPuntajesrep = new Array();
@@ -141,6 +117,7 @@ function seleccionarMejorMovimiento(movimientosPosibles){
     return arrayPuntajesrep[rndm];
 }
 
+/*Funcion que genera un movimiento con su respectivo puntaje */
 function movimiento(f_fila, f_col, t_f,t_c,pieza,mult){
 
     var points = puntaje(pieza,mult);
@@ -154,7 +131,8 @@ function movimiento(f_fila, f_col, t_f,t_c,pieza,mult){
     
           return datos;
 }
-    
+
+/*Funcion que remueve los movimientos defaults*/
 function removerMoveDefault (arr) {
     for(let i = 0;i < arr.length ;++i){
             var p = arr[i].puntos;
@@ -168,30 +146,33 @@ function removerMoveDefault (arr) {
     return arr;
 }
 
+/*Funcion que genera un movimiento default que sirve cuando una pieza no puede realizar ningun movimiento
+(Sino el array queda vacio y genera errores)*/
 function moveDefault(){
-var datos = {
-"from_fila" : 0,
-"from_colum" : 0,
-"to_fila" : 0,
-"to_colum" : 0,
-"puntos":0
-};
+        var datos = {
+                "from_fila" : 0,
+                "from_colum" : 0,
+                "to_fila" : 0,
+                "to_colum" : 0,
+                "puntos":0
+                };
 
-return datos;
+        return datos;
 }
 
+/*Funcion que crea el mejor movimiento a enviar por el websocket */
 function mejorPuntaje(mJugada,board_id,turn_token){
 
 var move =  {
-"action": "move", 
-"data": {
-  "board_id": board_id,
-  "turn_token": turn_token,
-  "from_row": null,
-  "from_col": null,
-  "to_row": null,
-  "to_col": null
-    }
+        "action": "move", 
+        "data": {
+        "board_id": board_id,
+        "turn_token": turn_token,
+        "from_row": null,
+        "from_col": null,
+        "to_row": null,
+        "to_col": null
+        }
 };
     
   move.data.from_row = mJugada.from_fila;
@@ -200,20 +181,6 @@ var move =  {
   move.data.to_col = mJugada.to_colum
   return move;
 }
-
-/*function seleccionarMejorMovimiento(movimientosPosibles){														
-														
-var mejorMov = movimientosPosibles.reduce((prev,current)=>{														
-if (prev.puntos > current.puntajeMov){														
-        return prev;														
-} else if (prev.puntos < current.puntos){														
-        return current;														
-} else {														
-        return Math.random() >= 0.5 ? prev : current; 														
-}														
-})														
-        return mejorMov														
-}*/
 
 module.exports = {
                     movimiento
