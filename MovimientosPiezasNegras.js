@@ -1,3 +1,5 @@
+const {movimiento, seleccionarMejorMovimiento, moveDefault} = require('./mi_turno')
+
 /*Funciones para obtener los mejores movimientos de cada pieza de color negro del tablero*/
 
 /*Funcion del peon negro, que recible el tablero actual y la posicion del peon en cuestion y retorna el mejor movimiento posible*/
@@ -291,4 +293,13 @@ function moveBlackQueen(tablero,fila,col){
             }else{
                     return seleccionarMejorMovimiento(blackQueenArray);
             }
-}   
+}
+
+module.exports = {
+        moveBlackPawn,
+        moveBlackHorse,
+        moveBlackKing,
+        moveBlackBishop,
+        moveBlackRook,
+        moveBlackQueen
+      }

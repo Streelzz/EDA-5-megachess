@@ -1,3 +1,5 @@
+const {puntaje} = require('./Tablero_puntajePiezas')
+
 /*Procedimiento que envia al websocket el mejor movimiento posible*/
 function mi_turno(msg){
     var board = msg.data.board;
@@ -183,5 +185,7 @@ var move =  {
 }
 
 module.exports = {
-                    movimiento
+        movimiento,
+        seleccionarMejorMovimiento,
+        moveDefault
 }

@@ -38,6 +38,6 @@ function puntaje(pieza,mult){
 }
   
 module.exports = {
-                    crearTablero,
-                    puntaje
-                  }
+  crearTablero,
+  puntaje
+}
