@@ -1,4 +1,4 @@
-const {movimiento, seleccionarMejorMovimiento, moveDefault} = require('./mi_turno')
+var {movimiento, seleccionarMejorMovimiento, moveDefault} = require('./mi_turno')
 
 /*Funciones para obtener los mejores movimientos de cada pieza de color negro del tablero*/
 
