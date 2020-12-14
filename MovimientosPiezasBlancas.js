@@ -1,4 +1,5 @@
 var {movimiento, seleccionarMejorMovimiento, moveDefault} = require('./mi_turno')
+
 /*Funciones para obtener los mejores movimientos de cada pieza de color blanco del tablero*/
 
 /*Funcion del peon blanco, que recible el tablero actual y la posicion del peon en cuestion y retorna el mejor movimiento posible*/
