@@ -17,3 +17,9 @@ function mostrarUsuarios(domElement, array) {
                            select.add(option);
            }
 }
+
+function abortar(){
+    var board_id = document.getElementById("abort_board_id").value;
+    console.log(board_id);
+    abort(board_id);
+}

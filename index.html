@@ -18,10 +18,9 @@
         <input type="submit" value="Desafiar" onclick="seleccionarOponenente()" />
 </div>
   <div>
-    <input type="submit" value="Abortar" onclick="abortar()" />
-  </div>
-  <div>
-    <input type="submit" value="Cerrar" onclick="" />
+    <label for="oponentes">INGRESE EL BOARD ID</label>
+    <input type="text" id="abort_board_id" name="abotar">
+    <input type="submit" value="Abortar" onclick="abortar()"/> 
   </div>
   <div id="messages"></div>
   <script src="WebSocket.js"></script>
